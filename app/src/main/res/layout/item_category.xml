@@ -1,0 +1,73 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="8dp">
+
+    <!-- Верхняя строка с кнопками и названием категории -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <!-- Кнопка треугольника для запуска таймера -->
+        <ImageView
+            android:id="@+id/btnStartTimer"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@android:drawable/ic_media_play"
+            android:contentDescription="Старт таймера" />
+
+        <!-- Название категории -->
+        <TextView
+            android:id="@+id/categoryTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@{category.title}"
+            android:textSize="18sp"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp" />
+
+        <!-- Время, затраченное на категорию -->
+        <TextView
+            android:id="@+id/categoryTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="00:00:00"
+            android:textSize="16sp"
+            android:paddingStart="8dp"
+            android:textColor="@android:color/darker_gray"/>
+
+        <!-- Кнопка с тремя точками -->
+        <ImageView
+            android:id="@+id/btnCategoryOptions"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_more_vert"
+            android:contentDescription="Опции категории" />
+    </LinearLayout>
+
+    <!-- RecyclerView для списка задач -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/taskRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:nestedScrollingEnabled="false"/>
+
+    <!-- Кнопка "Добавить задачу" -->
+    <Button
+        android:id="@+id/btnAddTask"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="+"
+        android:padding="0dp"
+        android:textSize="14sp"
+        android:textColor="@android:color/black"
+        android:background="@drawable/rounded_button"
+        android:layout_gravity="left"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"/>
+
+</LinearLayout>

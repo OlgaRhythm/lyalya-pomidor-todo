@@ -1,0 +1,136 @@
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Основной контейнер для таймера и кнопок -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/timerControlsContainer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/navigationButtons">
+
+        <!-- Таймер -->
+        <com.google.android.material.progressindicator.CircularProgressIndicator
+            android:id="@+id/timerProgress"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            app:indicatorSize="100dp"
+            app:indicatorColor="@color/primaryColor"
+            app:trackColor="@color/gray"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <TextView
+            android:id="@+id/timerView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="25:00"
+            android:textSize="24sp"
+            android:gravity="center"
+            app:layout_constraintTop_toTopOf="@id/timerProgress"
+            app:layout_constraintBottom_toBottomOf="@id/timerProgress"
+            app:layout_constraintStart_toStartOf="@id/timerProgress"
+            app:layout_constraintEnd_toEndOf="@id/timerProgress" />
+
+        <!-- Вертикальный контейнер для кнопок справа -->
+        <LinearLayout
+            android:id="@+id/buttonsColumn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginStart="16dp"
+            app:layout_constraintStart_toEndOf="@id/timerProgress"
+            app:layout_constraintTop_toTopOf="@id/timerProgress"
+            app:layout_constraintBottom_toBottomOf="@id/timerProgress">
+
+            <!-- Кнопка паузы/продолжения -->
+            <ImageButton
+                android:id="@+id/btnPauseResume"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="?attr/selectableItemBackground"
+                android:src="@drawable/pause_24px"
+                android:visibility="gone"
+                android:layout_marginBottom="8dp"/>
+
+            <!-- Кнопка стоп -->
+            <ImageButton
+                android:id="@+id/btnStop"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="?attr/selectableItemBackground"
+                android:src="@drawable/stop_24px"
+                android:visibility="gone"
+                android:layout_marginBottom="8dp"/>
+
+            <!-- Кнопка "Закончить раньше" -->
+            <ImageButton
+                android:id="@+id/btnFinishEarly"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="?attr/selectableItemBackground"
+                android:src="@drawable/replay_24px"
+                android:visibility="gone"/>
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- Кнопки навигации -->
+    <LinearLayout
+        android:id="@+id/navigationButtons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/timerControlsContainer"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:gravity="center"
+        android:layout_marginTop="16dp">
+
+        <!-- Кнопки навигации, если нужны -->
+    </LinearLayout>
+
+    <!-- Контейнер для скроллинга -->
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/navigationButtons"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- RecyclerView для задач -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/taskList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:overScrollMode="never"
+                android:scrollbars="vertical" />
+
+            <!-- Кнопка "Добавить категорию" -->
+            <Button
+                android:id="@+id/btnAddTask"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Добавить категорию"
+                android:padding="0dp"
+                android:textSize="14sp"
+                android:textColor="@android:color/black"
+                android:background="@drawable/rounded_button"
+                android:layout_gravity="center"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"/>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
