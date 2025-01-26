@@ -24,8 +24,6 @@ import java.util.Locale
 
 class CategoryViewModel (application: Application) : AndroidViewModel(application) {
 
-
-
     private var currentSessionId: Int? = null
     private val categoryDao by lazy { AppDatabase.getDatabase(application).categoryDao() }
     private val taskDao by lazy { AppDatabase.getDatabase(application).taskDao() }
@@ -67,6 +65,12 @@ class CategoryViewModel (application: Application) : AndroidViewModel(applicatio
     fun updateCategory(category: Category) {
         viewModelScope.launch(Dispatchers.IO) {
             categoryDao.insert(category) // Используем insert с REPLACE стратегией
+        }
+    }
+
+    fun deleteCategory(category: Category) {
+        viewModelScope.launch {
+            categoryDao.delete(category)
         }
     }
 

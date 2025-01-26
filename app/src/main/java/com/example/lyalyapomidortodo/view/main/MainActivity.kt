@@ -59,7 +59,18 @@ class MainActivity : AppCompatActivity() {
 
         recyclerView = findViewById(R.id.taskList)
         recyclerView.layoutManager = LinearLayoutManager(this)
-        categoryAdapter = CategoryAdapter(emptyList()) { category -> onCategoryClicked(category) }
+        categoryAdapter = CategoryAdapter(
+            emptyList(),
+            onCategoryClicked = { category ->
+                // ваша существующая логика запуска таймера
+            },
+            onCategoryUpdated = { updatedCategory ->
+                categoryViewModel.updateCategory(updatedCategory)
+            },
+            onCategoryDeleted = { categoryToDelete ->
+                categoryViewModel.deleteCategory(categoryToDelete)
+            }
+        ) { category -> onCategoryClicked(category) }
         recyclerView.adapter = categoryAdapter
 
         categoryViewModel.categories.observe(this, Observer { categories ->
