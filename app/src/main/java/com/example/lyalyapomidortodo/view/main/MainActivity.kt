@@ -4,18 +4,22 @@ import CategoryAdapter
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.view.View
+import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lyalyapomidortodo.R
 import com.example.lyalyapomidortodo.data.local.entities.Category
 import com.example.lyalyapomidortodo.viewmodel.CategoryViewModel
 import com.google.android.material.progressindicator.CircularProgressIndicator
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.util.concurrent.TimeUnit
 
 class MainActivity : AppCompatActivity() {
@@ -24,6 +28,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var btnPauseResume: ImageButton
     private lateinit var btnStop: ImageButton
     private lateinit var btnRestart: ImageButton
+    private lateinit var btnAddCategory: Button
 
     private var timer: CountDownTimer? = null
     private val workTimeInMillis = 25 * 60 * 1000L
@@ -46,6 +51,7 @@ class MainActivity : AppCompatActivity() {
         btnPauseResume = findViewById(R.id.btnPauseResume)
         btnStop = findViewById(R.id.btnStop)
         btnRestart = findViewById(R.id.btnFinishEarly)
+        btnAddCategory = findViewById<Button>(R.id.btnAddTask)
 
         // Изначально кнопки скрыты (таймер на 25 минутах и ждёт)
         setButtonsVisibility(false)
@@ -53,6 +59,7 @@ class MainActivity : AppCompatActivity() {
         btnPauseResume.setOnClickListener { togglePauseResume() }
         btnStop.setOnClickListener { stopTimer() }
         btnRestart.setOnClickListener { restartTimer() }
+        btnAddCategory.setOnClickListener { addNewCategory() }
 
         updateTimerDisplay()
         updateProgressIndicator()
@@ -75,7 +82,12 @@ class MainActivity : AppCompatActivity() {
 
         categoryViewModel.categories.observe(this, Observer { categories ->
             categoryAdapter.updateData(categories)
+            recyclerView.smoothScrollToPosition(categories.size - 1)
         })
+    }
+
+    private fun addNewCategory() {
+        categoryViewModel.addNewCategory()
     }
 
     private fun onCategoryClicked(category: Category) {

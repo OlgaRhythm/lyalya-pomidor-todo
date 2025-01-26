@@ -10,6 +10,7 @@ import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
 import androidx.work.workDataOf
 import com.example.lyalyapomidortodo.data.local.AppDatabase
+import com.example.lyalyapomidortodo.data.local.dao.CategoryDao
 import com.example.lyalyapomidortodo.data.local.entities.Category
 import com.example.lyalyapomidortodo.data.local.entities.Session
 import kotlinx.coroutines.launch
@@ -118,7 +119,11 @@ class CategoryViewModel (application: Application) : AndroidViewModel(applicatio
         }
     }
 
-    fun getTotalTimeForCategory(categoryId: Int): LiveData<Long?> {
-        return MutableLiveData<Long?>(0L) // По умолчанию 0
+
+    fun addNewCategory() {
+        viewModelScope.launch (Dispatchers.IO) {
+            val newCategory = Category(title = "Новая категория")
+            categoryDao.insert(newCategory)
+        }
     }
 }
