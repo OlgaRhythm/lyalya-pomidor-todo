@@ -13,11 +13,10 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.flow.firstOrNull
 
-@Database(entities = [Category::class, Task::class, Session::class], version = 1, exportSchema = false)
+@Database(entities = [Category::class, Session::class], version = 2, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun categoryDao(): CategoryDao
-    abstract fun taskDao(): TaskDao
     abstract fun sessionDao(): SessionDao
 
     companion object {

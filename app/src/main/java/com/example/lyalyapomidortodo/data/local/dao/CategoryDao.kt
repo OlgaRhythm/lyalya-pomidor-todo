@@ -16,9 +16,6 @@ interface CategoryDao {
     @Delete
     fun delete(category: Category)
 
-    @Query("UPDATE category SET deleted = 1 WHERE id = :id")
-    fun softDelete(id: Int): Int
-
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertAll(categories: List<Category>)
 

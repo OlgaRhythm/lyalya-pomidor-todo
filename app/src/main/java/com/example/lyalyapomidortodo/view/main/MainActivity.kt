@@ -82,7 +82,9 @@ class MainActivity : AppCompatActivity() {
 
         categoryViewModel.categories.observe(this, Observer { categories ->
             categoryAdapter.updateData(categories)
-            recyclerView.smoothScrollToPosition(categories.size - 1)
+            if (categories.isNotEmpty()) {
+                recyclerView.smoothScrollToPosition(categories.size - 1)
+            }
         })
     }
 

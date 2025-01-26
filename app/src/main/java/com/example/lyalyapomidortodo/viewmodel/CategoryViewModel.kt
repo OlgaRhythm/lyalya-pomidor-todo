@@ -14,7 +14,6 @@ import com.example.lyalyapomidortodo.data.local.dao.CategoryDao
 import com.example.lyalyapomidortodo.data.local.entities.Category
 import com.example.lyalyapomidortodo.data.local.entities.Session
 import kotlinx.coroutines.launch
-import com.example.lyalyapomidortodo.data.local.entities.Task
 import com.example.lyalyapomidortodo.worker.TimerWorker
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
@@ -38,10 +37,6 @@ class CategoryViewModel (application: Application) : AndroidViewModel(applicatio
         }
     }
 
-    fun getTasksForCategory(categoryId: Int): LiveData<List<Task>> {
-        return MutableLiveData<List<Task>>(emptyList()) // Пустой список по умолчанию
-    }
-
     fun startTimer(categoryId: Int, durationMillis: Long) {
         val workRequest = OneTimeWorkRequestBuilder<TimerWorker>()
             .setInputData(
@@ -53,13 +48,6 @@ class CategoryViewModel (application: Application) : AndroidViewModel(applicatio
             .build()
 
         WorkManager.getInstance(getApplication()).enqueue(workRequest)
-    }
-
-    fun softDeleteCategory(id: Int) {
-        viewModelScope.launch(Dispatchers.IO) {
-            val result = categoryDao.softDelete(id)
-            println(result)
-        }
     }
 
     fun updateCategory(category: Category) {

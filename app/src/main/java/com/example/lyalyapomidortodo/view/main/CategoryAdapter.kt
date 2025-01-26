@@ -6,16 +6,10 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.PopupMenu
 import android.widget.TextView
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.LiveData
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lyalyapomidortodo.R
 import com.example.lyalyapomidortodo.data.local.entities.Category
-import com.example.lyalyapomidortodo.data.local.entities.Task
-import com.example.lyalyapomidortodo.view.main.CategoryListAdapter
 import androidx.appcompat.app.AlertDialog
-import androidx.lifecycle.Observer
 
 class CategoryAdapter(
     private var categories: List<Category>,
