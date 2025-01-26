@@ -27,7 +27,6 @@ class CategoryViewModel (application: Application) : AndroidViewModel(applicatio
 
     private var currentSessionId: Int? = null
     private val categoryDao by lazy { AppDatabase.getDatabase(application).categoryDao() }
-    private val taskDao by lazy { AppDatabase.getDatabase(application).taskDao() }
     private val sessionDao by lazy { AppDatabase.getDatabase(application).sessionDao() }
     val categories: LiveData<List<Category>> = categoryDao.getLiveCategories()
 
@@ -70,7 +69,7 @@ class CategoryViewModel (application: Application) : AndroidViewModel(applicatio
     }
 
     fun deleteCategory(category: Category) {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             categoryDao.delete(category)
         }
     }
