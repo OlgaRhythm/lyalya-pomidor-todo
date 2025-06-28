@@ -35,8 +35,19 @@ android {
         jvmTarget = "17" // Соответствует JDK 17
     }
 
-    viewBinding {
-        enable = true
+    buildFeatures {
+        compose = true
+        viewBinding = true
+    }
+    
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.5.11" // Совместим с Kotlin 1.9.24
+    }
+    
+    packaging {
+        resources {
+            excludes += "/META-INF/{AL2.0,LGPL2.1}"
+        }
     }
 }
 
@@ -45,20 +56,31 @@ dependencies {
     implementation("androidx.core:core:1.13.1")
     implementation("androidx.core:core-ktx:1.13.1")
 
-    implementation("androidx.room:room-runtime:2.5.2")
-    kapt("androidx.room:room-compiler:2.5.2")
-    implementation("androidx.room:room-ktx:2.6.1")
+    implementation(platform(libs.compose.bom))
+    
+    implementation(libs.compose.ui)
+    implementation(libs.compose.ui.tooling.preview)
+    implementation(libs.compose.material3)
+    implementation(libs.compose.activity)
+    implementation(libs.compose.viewmodel)
+    implementation(libs.compose.runtime.livedata)
 
-    implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
+    implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.room.ktx)
+    kapt(libs.androidx.room.compiler)
 
-    implementation ("androidx.work:work-runtime-ktx:2.8.1")
+    implementation(libs.androidx.lifecycle.viewmodel)
+
+    implementation(libs.androidx.work.runtime)
 
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
     implementation(libs.androidx.constraintlayout)
+    
+    debugImplementation(libs.compose.ui.tooling)
+    debugImplementation(libs.compose.ui.test.manifest)
+    
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-
-
 }

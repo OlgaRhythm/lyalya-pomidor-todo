@@ -13,7 +13,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.flow.firstOrNull
 
-@Database(entities = [Category::class, Session::class], version = 2, exportSchema = false)
+@Database(entities = [Category::class, Session::class], version = 3, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun categoryDao(): CategoryDao
@@ -30,6 +30,7 @@ abstract class AppDatabase : RoomDatabase() {
                     AppDatabase::class.java,
                     "pomodoro_database"
                 )
+                    .fallbackToDestructiveMigration() // Для простоты при разработке
                     .addCallback(PrepopulateDataCallback())
                     .build()
                 INSTANCE = instance
@@ -48,8 +49,8 @@ abstract class AppDatabase : RoomDatabase() {
                         ?: emptyList()
                     if (categories.isEmpty()) {
                         val defaultCategories = listOf(
-                            Category(id = 1, title = "Учёба", color = "#FF5733", deleted = false),
-                            Category(id = 2, title = "Работа", color = "#33AFFF", deleted = false)
+                            Category(id = 1, title = "Учёба", color = "#FF5733", deleted = false, totalTimeSpent = 0L),
+                            Category(id = 2, title = "Работа", color = "#33AFFF", deleted = false, totalTimeSpent = 0L)
                         )
                         categoryDao.insertAll(defaultCategories)
                     }

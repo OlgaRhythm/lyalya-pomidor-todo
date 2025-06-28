@@ -13,10 +13,11 @@
         android:theme="@style/Theme.LyalyaPomidorTodo"
         tools:targetApi="31">
         <activity
-            android:name=".view.main.MainActivity"
+            android:name=".MainActivity"
             android:exported="true"
             android:launchMode="standard"
             android:hardwareAccelerated="true"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
             android:configChanges="orientation|screenSize|keyboardHidden|smallestScreenSize|screenLayout">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
