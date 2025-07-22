@@ -3,9 +3,8 @@
 ### Описание приложения
 **Lyalya Pomidor Todo** — это мобильное приложение для управления временем с использованием техники Pomodoro
 
-![main.jpeg](doc/img/main.jpeg)
-![start_conc.jpeg](doc/img/start_conc.jpeg)
-![start_rest.jpeg](doc/img/start_rest.jpeg)
+| ![main.jpeg](doc/img/main.jpeg) | ![start_conc.jpeg](doc/img/start_conc.jpeg) | ![start_rest.jpeg](doc/img/start_rest.jpeg) |
+|---------------------------------|---------------------------------------------|---------------------------------------------|
 
 ### 🎯 Основные функции
 
